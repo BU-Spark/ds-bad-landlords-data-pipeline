@@ -18,8 +18,9 @@ Overall, this repo contains code to;
   docker build -t image_name .
   ```
 - Run container
-  `    docker run -p 80:80 -d --name container_name image_name
-   `
+  ```
+     docker run -p 80:80 -d --name container_name image_name
+  ```
   The above will build a docker image and start a container. On start, the container runs a bash script which schedules a cron job and starts a Flask server. The cron job runs a python module that fetches and processes data and is scheduled to run once every day.
 
 The results of the data processing is stored in SQLite tables which are read and returned by the server when a client sends an API request to it.
@@ -28,6 +29,6 @@ The results of the data processing is stored in SQLite tables which are read and
 
 There are other docs in project that go over specific topics.
 
-- DataProcessing: Goes over the methods used to identify badlandlords.
-- Deployment: Goes over how this project is deployed and how to change configurations.
-- ApiServer : Goes over the available API routes and what they return.
+- [DataProcessing](DataProcessing.md): Goes over the methods used to identify bad landlords.
+- [Deployment](Deployment.md): Goes over how this project is deployed and how to change configurations.
+- [ApiServer](src/api-server/ApiServer.md) : Goes over the available API routes and what they return.

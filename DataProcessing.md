@@ -119,7 +119,7 @@ https://data.boston.gov/api/3/action/datastore_search_sql?sql=SELECT * from "a9e
 
 - load into dataframe, df.
 
-- Get building parcel in sam table. Get from https://bostonopendata-boston.opendata.arcgis.com/api/download/v1/items/b6bffcace320448d96bb84eabb8a075f/csv?layers=0 . Sam dataset doesn't seem to be available anymore. It also hasn't been getting regular updates. Last update was 6 months ago, as of June, 2024. We could use previously-fetched sam table in postGres db.
+- Get building parcel in sam table. Get from https://bostonopendata-boston.opendata.arcgis.com/api/download/v1/items/b6bffcace320448d96bb84eabb8a075f/csv?layers=0 . Sam dataset doesn't seem to be available anymore. It also hasn't been getting regular updates. Last update was 6 months ago, as of June, 2024. We could use previously-fetched sam table in postGres db. Alternatively, 
 
 ```
 

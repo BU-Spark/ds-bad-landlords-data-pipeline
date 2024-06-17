@@ -21,7 +21,7 @@ This is a simple api to return results of the processing. Several routes will be
   - Return bad landlords in json format
   - params:
     - criteria : I, II, II, All
-    -
+    
   - Implementation:
 
     - criteria I: get unique landlords from badlandlords_criteria_i table.
