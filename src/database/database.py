@@ -1,8 +1,8 @@
 import sqlite3
 
-DATABASE_NAME = 'sample.db'
+DATABASE_NAME = 'badlandlords.db'
 
-def get_db_connection():
+def getSQLiteConnection():
     conn = sqlite3.connect(DATABASE_NAME)
     conn.row_factory = sqlite3.Row
     return conn
@@ -11,7 +11,6 @@ def createAllTables():
     conn = sqlite3.connect(DATABASE_NAME)
     cursor = conn.cursor()
 
-    # processing_summary_table
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS processing_summary_table (
             id INTEGER PRIMARY KEY,
@@ -21,6 +20,13 @@ def createAllTables():
             data_points TEXT,
             filters TEXT
         )
+    ''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS badlandlords_criteria_i (
+            party_name varchar(255),
+            party_id bigint(20),
+            case_number varchar(50)
+        );
     ''')
     conn.commit()
     conn.close()
@@ -34,3 +40,19 @@ def updateSummaryTable(summary):
     ''', (summary))
     conn.commit()
     conn.close()
+
+def insertIntoSQLiteTable(table_name, data):
+    try:
+        conn = sqlite3.connect(DATABASE_NAME)
+        cursor = conn.cursor()
+        query = f'INSERT INTO {table_name} VALUES (?, ?, ?)'
+        cursor.executemany(query, data)
+        conn.commit()
+        print(f"Data inserted into {table_name} table successfully!")
+    except sqlite3.Error as error:
+        print(f"Error while inserting data into {table_name} table:", error)
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()

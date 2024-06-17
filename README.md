@@ -19,7 +19,7 @@ Overall, this repo contains code to;
   ```
 - Run container
   ```
-     docker run -p 80:80 -d --name container_name image_name
+  docker run -p 80:80 -d --name container_name image_name
   ```
   The above will build a docker image and start a container. On start, the container runs a bash script which schedules a cron job and starts a Flask server. The cron job runs a python module that fetches and processes data and is scheduled to run once every day.
 
