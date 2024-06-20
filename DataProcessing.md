@@ -105,7 +105,7 @@ The datasets are available via APIs.
     - code = 780 || code = 527 || code = 105 
 
 ```
-https://data.boston.gov/api/3/action/datastore_search_sql?sql=SELECT * from "800a2663-1d6a-46e7-9356-bedb70f5332c" WHERE status_dttm >= '2023-01-01 00:00:00' AND code IN ('780', '527', '105')
+https://data.boston.gov/api/3/action/datastore_search_sql?sql=SELECT * from "800a2663-1d6a-46e7-9356-bedb70f5332c" WHERE status_dttm >= '2023-06-21 15:03:40' AND code IN ('780', '527', '105')
 
 ```
 

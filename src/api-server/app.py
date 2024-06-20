@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 
+from src.criteriaI.processI import getUniqueBadLandlords
 from src.database.database import getSQLiteConnection
 
 app = Flask(__name__)
@@ -23,11 +24,16 @@ def getBadLandlords():
     if criteria not in ['i', 'ii', 'iii', 'all']:
         return jsonify({'error': 'Invalid criteria passed'})
     try:
-        conn = getSQLiteConnection()
-        cursor = conn.cursor()
-        cursor.execute(f'SELECT * FROM badlandlords_criteria_{criteria}')
-        rows = cursor.fetchall()
-        conn.close()
+        rows = None
+        if criteria == 'i':
+            rows = getUniqueBadLandlords()
+        # conn = getSQLiteConnection()
+        # cursor = conn.cursor()
+        # cursor.execute(f'SELECT * FROM badlandlords_criteria_{criteria}')
+        # rows = cursor.fetchall()
+        # conn.close()
+        if(rows == None):
+            return jsonify([])
         data = [dict(row) for row in rows]
         return jsonify(data)
     except Exception as e:

@@ -26,7 +26,7 @@ def getConnection():
         print("Error while connecting to masscourt database:", error)
         return None
 
-def fetchData():
+def fetchBadLandlordsFromCourtCaseDatabase():
     connection = getConnection()
     if connection is None:
         return
@@ -44,14 +44,13 @@ def fetchData():
     print("Executing query...", query)
     cursor.execute(query)
     result = cursor.fetchall()
-
+    # insert only unique bad landlords into the SQLite database
     insertIntoSQLiteTable("badlandlords_criteria_i" ,result)
     cursor.close()
     connection.close()
 
 
-def getBadLandlords():
-    fetchData()
+def getUniqueBadLandlords():
     conn = getSQLiteConnection()
     cursor = conn.cursor()
     cursor.execute('''
@@ -59,8 +58,6 @@ def getBadLandlords():
         FROM badlandlords_criteria_i
         GROUP BY party_id;
     ''')
-    result = cursor.fetchall()
-    for row in result:
-       print(row[0], row[1], row[2])
+    rows = cursor.fetchall()
     conn.close()
-    return result
+    return rows

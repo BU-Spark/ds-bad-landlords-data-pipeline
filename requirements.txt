@@ -4,3 +4,4 @@ gunicorn
 openpyxl
 mysql-connector-python
 python-dotenv
+requests
