@@ -20,7 +20,10 @@ This is a simple api to return results of the processing. Several routes will be
 
   - Return bad landlords in json format
   - params:
-    - criteria : I, II, III, All
+    - criteria : i, ii, iii, all
+  - return format:
+    - criteria i : {name, cases}
+    - criteria ii : {name, address, violations, properties}. violations and properties are comma separated OR arrays of strings. A violation is represented by violation case number whilst a property is represented by full address.
     
   - Implementation:
 

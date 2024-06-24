@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
 
-from src.criteriaI.processI import getUniqueBadLandlords
+from src.criteriaI.processI import getFormattedUniqueBadLandlords
 from src.database.database import getSQLiteConnection
 
 app = Flask(__name__)
@@ -26,7 +26,7 @@ def getBadLandlords():
     try:
         rows = None
         if criteria == 'i':
-            rows = getUniqueBadLandlords()
+            return getFormattedUniqueBadLandlords()
         # conn = getSQLiteConnection()
         # cursor = conn.cursor()
         # cursor.execute(f'SELECT * FROM badlandlords_criteria_{criteria}')

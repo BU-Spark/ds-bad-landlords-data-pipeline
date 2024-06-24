@@ -136,6 +136,26 @@ https://data.boston.gov/api/3/action/datastore_search_sql?sql=SELECT * from "a9e
 - Create landlord ids for efficient tallying
   Using fuzzy matching, create an index of all landlords. For each row, check all other rows if match exceeds 0.9. If so, it's the same landlord. Add id.
 
+
+- Write results to new table
+table 1: properties with violations (with landlord name attached)
+table 2: violations
+
+form another table: 
+
+  - name : owner from property table
+  - address : mail combo from property table
+  - violations : case numbers from table 1 where landlord name is the same
+  - properties : from query search
+```
+Table : badlandlords_criteria_i
+Schema:
+    - name : varchar(255)
+    - address : bigint(20) UN
+    - violations : varchar(50) 
+    - properties
+```
+
 ## Criteria III
 
 This part is trivial. The short list here is hardcoded in a json. When the list starts to grow, a scraping script will be added to get the updated list regularly.
@@ -152,9 +172,9 @@ This part is trivial. The short list here is hardcoded in a json. When the list 
 
 - Name
 - Address
-- Properties
 - Violations
-- NumberOfViolations
+- Properties
+
 
 ## Criteria III
 

@@ -11,6 +11,12 @@ def createAllTables():
     conn = sqlite3.connect(DATABASE_NAME)
     cursor = conn.cursor()
 
+    # Delete previusly identified badlandlords. 
+    # Other processing data is left untouched
+    cursor.execute('''
+        DROP TABLE IF EXISTS badlandlords_criteria_i
+    ''')
+
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS processing_summary_table (
             id INTEGER PRIMARY KEY,

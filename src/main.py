@@ -6,9 +6,9 @@ from criteriaII.processII import determineBadlandlordsFromViolationsDatasets, pr
 from criteriaI.processI import fetchBadLandlordsFromCourtCaseDatabase
 
 
+
 def identifyBadLandlords():
     start_time = time.time()
-
     print("Processing data...")
     # Process the data here
     # fetchBadLandlordsFromCourtCaseDatabase()
