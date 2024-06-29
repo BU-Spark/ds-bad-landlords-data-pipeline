@@ -34,6 +34,14 @@ def createAllTables():
             case_number varchar(50)
         );
     ''')
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS badlandlords_criteria_ii (
+            name varchar(255),
+            violation_code varchar(50),
+            address TEXT,
+            properties TEXT
+        );
+    ''')
     conn.commit()
     conn.close()
 
@@ -51,7 +59,8 @@ def insertIntoSQLiteTable(table_name, data):
     try:
         conn = sqlite3.connect(DATABASE_NAME)
         cursor = conn.cursor()
-        query = f'INSERT INTO {table_name} VALUES (?, ?, ?)'
+        placeholders = ', '.join(['?' for _ in range(len(data[0]))])
+        query = f'INSERT INTO {table_name} VALUES ({placeholders})'
         cursor.executemany(query, data)
         conn.commit()
         print(f"Data inserted into {table_name} table successfully!")

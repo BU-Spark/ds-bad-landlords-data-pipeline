@@ -21,7 +21,6 @@ RUN chmod 0644 /etc/cron.d/cron-scheduler
 # Apply the cron job
 RUN crontab /etc/cron.d/cron-scheduler
 
-# Create the log file to be able to run tail
 RUN touch /var/log/cron.log
 
 COPY entrypoint.sh root/entrypoint.sh

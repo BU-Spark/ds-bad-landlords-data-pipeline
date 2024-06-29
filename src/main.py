@@ -1,11 +1,9 @@
 import time
 import json
-from database.database import createAllTables, updateSummaryTable
+from database.database import createAllTables, getSQLiteConnection, updateSummaryTable
 import datetime
-from criteriaII.processII import determineBadlandlordsFromViolationsDatasets, processData
+from criteriaII.processII import determineBadlandlordsFromViolationsDatasets
 from criteriaI.processI import fetchBadLandlordsFromCourtCaseDatabase
-
-
 
 def identifyBadLandlords():
     start_time = time.time()
@@ -27,3 +25,11 @@ def identifyBadLandlords():
 
 createAllTables()
 identifyBadLandlords()
+conn = getSQLiteConnection()
+cursor = conn.cursor()
+criteria = "ii"
+cursor.execute(f'SELECT * FROM badlandlords_criteria_{criteria}')
+rows = cursor.fetchall()
+result = [dict(zip([column[0] for column in cursor.description], row)) for row in rows]
+print(json.dumps(result))
+conn.close()

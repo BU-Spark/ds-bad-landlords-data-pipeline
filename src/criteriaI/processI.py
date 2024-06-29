@@ -40,7 +40,7 @@ def fetchBadLandlordsFromCourtCaseDatabase():
             WHERE pa.party_type = 'Defendant' \
             AND cm.case_status = 'Active' \
             AND cm.case_type IN ('Housing Court Civil', 'Housing Court Summary Process') \
-            LIMIT 15;"
+            LIMIT 15;" # TODO remove limit after figuring out the correct query based on accurate interpretation of the criteria of the ordinance
     print("Executing query...", query)
     cursor.execute(query)
     result = cursor.fetchall()
