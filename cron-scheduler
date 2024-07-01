@@ -1,1 +1,1 @@
-* * * * * echo "$(date) - Running data pipeline" >> logfile.log 2>&1 && python3 src/main.py >> logfile.log 2>&1
+0 0 * * * echo "$(date) - Running data pipeline" >> logfile.log 2>&1 && python3 src/main.py >> logfile.log 2>&1

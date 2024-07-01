@@ -63,7 +63,6 @@ WHERE pa.party_type = 'Defendant'
 
 ```
 
-
 ## Criteria II
 
 To find badlandlords in criteria II, we use all three data sources (ie, violations, sam, property). Each row in violations table has a SamId. We get the Parcel number associated with that SamId in the sam table. Then we use that parcel number to find the associated landlord in the property table.
@@ -72,13 +71,12 @@ We then filter down to landlords that rent out their properties and tally their 
 
 The datasets are available via APIs.
 
-
 ### Api calls to fetch data for Criteria II
 
 - Fetch qualifying violations
-  - Relevant filters: 
-    - status_dttm >= (now() - 12months) : ie with a date in the last 12 months: 
-    - code = 780 || code = 527 || code = 105 
+  - Relevant filters:
+    - status_dttm >= (now() - 12months) : ie with a date in the last 12 months:
+    - code = 780 || code = 527 || code = 105
 
 ```
 https://data.boston.gov/api/3/action/datastore_search_sql?sql=SELECT * from "800a2663-1d6a-46e7-9356-bedb70f5332c" WHERE status_dttm >= '2023-06-21 15:03:40' AND code IN ('780', '527', '105')
@@ -93,13 +91,13 @@ https://data.boston.gov/api/3/action/datastore_search_sql?sql=SELECT * from "800
 https://data.boston.gov/api/3/action/datastore_search_sql?sql=SELECT * from "a9eb19ad-da79-4f7b-9e3b-6b13e66f8285" WHERE "OWN_OCC" = 'N'
 ```
 
-- load into dataframe, df.
+- Get building parcel in sam table. Get from
 
-- Get building parcel in sam table. Get from https://bostonopendata-boston.opendata.arcgis.com/api/download/v1/items/b6bffcace320448d96bb84eabb8a075f/csv?layers=0 . Sam dataset doesn't seem to be available anymore. It also hasn't been getting regular updates. Last update was 6 months ago, as of June, 2024. We could use previously-fetched sam table in postGres db. Alternatively, 
+  ```
+  https://bostonopendata-boston.opendata.arcgis.com/api/download/v1/items/b6bffcace320448d96bb84eabb8a075f/csv?layers=0
+  ```
 
-```
-
-```
+  Sam dataset doesn't seem to be available anymore. It also hasn't been getting regular updates. Last update was 6 months ago, as of June, 2024. We use a prefetched file from over 6 months ago.
 
 - Add and fill new column "parcel".
   For each row in df, get and add parcel value by using the row's samid to fetch a parcel number in sam table.
@@ -108,11 +106,6 @@ https://data.boston.gov/api/3/action/datastore_search_sql?sql=SELECT * from "a9e
   For each row in df, get and add landlord value by using the row's parcel to fetch an owner in number in landlord table.
 
 - Create landlord tally.
-
-- Create landlord ids for efficient tallying
-  Using fuzzy matching, create an index of all landlords. For each row, check all other rows if match exceeds 0.9. If so, it's the same landlord. Add id.
-
-https://data.boston.gov/api/3/action/datastore_search_sql?sql=SELECT * from "a9eb19ad-da79-4f7b-9e3b-6b13e66f8285" WHERE "OWNER" LIKE 'LEXINGTON'
 
 ## Criteria III
 
@@ -125,14 +118,12 @@ This part is trivial. The short list here is hardcoded in a json. When the list 
 - Name
 - Cases
 
-
 ## Criteria II
 
 - Name
 - Address
 - Violations
 - Properties
-
 
 ## Criteria III
 
@@ -150,11 +141,11 @@ This part is trivial. The short list here is hardcoded in a json. When the list 
 - NumberOfViolations
 - QualifyingCriterias
 
-To get a combined list of landlords, we scan all three lists for similar landlord names. We make a copy of CII and look for each landlord name from other criterias in it. If not in, we append. We use CII row nums as landlord id. 
+To get a combined list of landlords, we scan all three lists for similar landlord names. We make a copy of CII and look for each landlord name from other criterias in it. If not in, we append. We use CII row nums as landlord id.
 
 # Notes
 
-Criteria II will often yield 0 bad landlords. This is simply due to the criteria having filters that are unlikely. 
+Criteria II will often accurately yield 0 bad landlords. This is simply due to the criteria having filters that are highly unlikely.
 
 First of all, the ordinance considers only 3 types of violations occuring in the last 12 months, which there aren't many of.
 
