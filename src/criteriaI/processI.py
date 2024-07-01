@@ -31,7 +31,7 @@ def identifyBadLandlordsFromCourtCaseDatabase():
     if connection is None:
         return
     
-    print("Criteria I: Fetching bad landlords from mass court data...")    
+    print("\nCriteria I: Fetching bad landlords from mass court data...\n")    
     cursor = connection.cursor()
     query = "SELECT pi.party_name, pa.party_id, cm.case_number \
             FROM cdocs_party_assignment_index pa \
@@ -40,7 +40,7 @@ def identifyBadLandlordsFromCourtCaseDatabase():
             WHERE pa.party_type = 'Defendant' \
             AND cm.case_status = 'Active' \
             AND cm.case_type IN ('Housing Court Civil', 'Housing Court Summary Process') \
-            LIMIT 15;" # TODO remove limit after figuring out the correct query based on accurate interpretation of the criteria of the ordinance
+            LIMIT 50;" # TODO remove limit after figuring out the correct query based on accurate interpretation of the criteria of the ordinance
     print("Executing query...", query)
     cursor.execute(query)
     result = cursor.fetchall()

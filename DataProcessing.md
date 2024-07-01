@@ -15,6 +15,7 @@ Relevant filters:
 - case_status == "Active"
 - case_type == "Housing Court Civil" | "Housing Court Summary Process"
 - party_type == "Defendant"
+- cases where the plaintiff is the City of Boston or Inspectional Services Department
 
 Note: The above filters may not be enough to narrow down to only cases that meet Criteria I. The current outstanding challenge is to identify cases where;
 
@@ -61,38 +62,13 @@ WHERE pa.party_type = 'Defendant'
   AND cm.case_type IN ('Housing Court Civil', 'Housing Court Summary Process');
 
 ```
-- Assign row numbers to unique landlords to facilitate future unique landlord queries
-```
-ALTER TABLE badlandlords_criteria_i ADD COLUMN row_num INT;
-```
-
-```
-UPDATE badlandlords_criteria_i
-SET row_num = sub.row_num
-FROM (
-    SELECT 
-        party_name, 
-        party_id, 
-        case_number,
-        ROW_NUMBER() OVER (PARTITION BY party_id ORDER BY party_id) AS row_num,
-        party_name, -- need a primary key or unique column to join
-        party_id,
-        case_number
-    FROM badlandlords_criteria_i
-) sub
-WHERE badlandlords_criteria_i.party_name = sub.party_name
-  AND badlandlords_criteria_i.party_id = sub.party_id
-  AND badlandlords_criteria_i.case_number = sub.case_number;
-
-```
-This pre-computation step ensures that subsequent queries fetching unique rows by party_id are faster.
 
 
 ## Criteria II
 
-To find badlandlords, we use all three tables. Each row in violations table has a SamId. We get the Parcel number associate with that SamId in the sam table. Then we use that parcel number to find the associated landlord in the property table.
+To find badlandlords in criteria II, we use all three data sources (ie, violations, sam, property). Each row in violations table has a SamId. We get the Parcel number associated with that SamId in the sam table. Then we use that parcel number to find the associated landlord in the property table.
 
-We then filter down to qualifying landlords and tally their total number of violations. Those with 6+ violations are 'bad' landlords.
+We then filter down to landlords that rent out their properties and tally their total number of violations. Those with 6+ violations are 'bad' landlords.
 
 The datasets are available via APIs.
 

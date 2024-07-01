@@ -25,11 +25,3 @@ def identifyBadLandlords():
 
 createResultTables()
 identifyBadLandlords()
-# conn = getSQLiteConnection()
-# cursor = conn.cursor()
-# criteria = "ii"
-# cursor.execute(f'SELECT * FROM badlandlords_criteria_{criteria}')
-# rows = cursor.fetchall()
-# result = [dict(zip([column[0] for column in cursor.description], row)) for row in rows]
-# print(json.dumps(result))
-# conn.close()

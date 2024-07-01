@@ -7,7 +7,7 @@ This is a simple api to return results of the data processing. Several routes wi
 - GET /status
 
   - returns info on the last run. Data points include
-    - time it took
+    - time taken to process data, in minutes.
     - number of bad landlords in each criteria
     - data points used to get bad landlords in each criteria
     - filters used
@@ -19,9 +19,9 @@ This is a simple api to return results of the data processing. Several routes wi
     - criteria : i, ii, iii, all
   - return format:
     - criteria i : {name, cases}
-    - criteria ii : {name, address, violations, properties}. A violation is represented by violation case number whilst a property is represented by full address.
+    - criteria ii : {name, address, violations, properties}. A violation is represented by violation case number whilst a property is represented by full address. Note that we return all landlords with a violation not necessarily those with 6+ violations. 
 
-- GET /badlandlords/search:
+- GET /search:
 
   - Return bad landlords that meet the search query. in json format
   - params:

@@ -66,7 +66,6 @@ def insertIntoSQLiteTable(table_name, data):
         query = f'INSERT INTO {table_name} VALUES ({placeholders})'
         cursor.executemany(query, data)
         conn.commit()
-        print(f"Data inserted into {table_name} table successfully!")
     except sqlite3.Error as error:
         print(f"Error while inserting data into {table_name} table:", error)
     finally:

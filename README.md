@@ -11,6 +11,12 @@ Overall, this repo contains code to;
 3. Rerun the above data fetching and processing steps at a regular cadence (once every day).
 4. Expose the list of 'scofflaw' landlords over a REST api.
 
+# Live deployment
+- https://badlandlords.sail.codes/summary : returns summary of the last process
+- https://badlandlords.sail.codes/badlandlords?criteria=i : returns list of bad landlords identified from court cases 
+- https://badlandlords.sail.codes/badlandlords?criteria=ii : returns badland lords  identified from building violations 
+
+
 # How to run
 
 - Build image
@@ -25,10 +31,11 @@ Overall, this repo contains code to;
 
 The results of the data processing is stored in SQLite tables which are read and returned by the server when a client sends an API request to it.
 
-## Other docs in this project
+# Other docs in this project
 
 There are other docs in project that go over specific topics.
 
 - [DataProcessing](DataProcessing.md): Goes over the methods used to identify bad landlords.
 - [Deployment](Deployment.md): Goes over how this project is deployed and how to change configurations.
 - [ApiServer](src/api-server/ApiServer.md) : Goes over the available API routes and what they return.
+- [Todos](Todos.md) : Goes over major todos of the project.

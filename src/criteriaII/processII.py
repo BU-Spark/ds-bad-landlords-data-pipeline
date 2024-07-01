@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 from database.database import insertIntoSQLiteTable
 
 def indentifyBadlandlordsFromViolationsDatasets():
+    print("\nCriteria II: Fetching bad landlords from building violations data...\n")    
     violations_df = fetchViolationsData()
     sam_df = fetchSamData()
     violations_df = addParcelIdsToViolationsDataset(violations_df, sam_df)
@@ -63,7 +64,6 @@ def fetchPropertyData(violations_df):
     violation_parcels = tuple(violations_df['parcel'].unique()) # we only need the landlords of the properties with violations
     url = f"https://data.boston.gov/api/3/action/datastore_search_sql?sql=SELECT * from \"a9eb19ad-da79-4f7b-9e3b-6b13e66f8285\" WHERE \"OWN_OCC\" = 'N' AND \"PID\" IN {violation_parcels}"
     print("Fetching property data with filters: OWN_OCC = 'N' AND PID IN", violation_parcels)
-    print(url)
     response = requests.get(url)
     if response.status_code == 200:
         data = response.json()["result"]["records"]
@@ -114,13 +114,11 @@ def consolidateBadlandlordsData(property_df, violations_df):
 def fetchLandlordProperties(landlordName):
     url = f"https://data.boston.gov/api/3/action/datastore_search_sql?sql=SELECT * from \"a9eb19ad-da79-4f7b-9e3b-6b13e66f8285\" WHERE \"OWNER\" LIKE '{landlordName}'"
     # TODO ensure all properties of landlord are fetched instead of just one
-    print(url)
     response = requests.get(url)
     if response.status_code == 200:
         data = response.json()["result"]["records"]
         l_p_df = pd.DataFrame(data)
         print("Successfully fetched property data for landlord:", landlordName)
-        print(l_p_df)
         l_p_df = l_p_df.fillna('')
         addresses = l_p_df.apply(lambda x: {
             'st_num': x['ST_NUM'],
@@ -133,7 +131,3 @@ def fetchLandlordProperties(landlordName):
     else:
         print("Error fetching properties of landlord:", landlordName)
         return []
-
-"""
-https://data.boston.gov/api/3/action/datastore_search_sql?sql=SELECT * from \"a9eb19ad-da79-4f7b-9e3b-6b13e66f8285\" WHERE \"OWNER\" LIKE 'LEXINGTON STREET REALTY TRUST'
-"""
