@@ -12,10 +12,10 @@ Overall, this repo contains code to;
 4. Expose the list of 'scofflaw' landlords over a REST api.
 
 # Live deployment
-- https://badlandlords.sail.codes/summary : returns summary of the last process
-- https://badlandlords.sail.codes/badlandlords?criteria=i : returns list of bad landlords identified from court cases 
-- https://badlandlords.sail.codes/badlandlords?criteria=ii : returns badland lords  identified from building violations 
 
+- https://badlandlords.sail.codes/summary : returns summary of the last process
+- https://badlandlords.sail.codes/badlandlords?criteria=i : returns list of bad landlords identified from court cases
+- https://badlandlords.sail.codes/badlandlords?criteria=ii : returns badland lords identified from building violations
 
 # How to run
 
@@ -39,3 +39,7 @@ There are other docs in project that go over specific topics.
 - [Deployment](Deployment.md): Goes over how this project is deployed and how to change configurations.
 - [ApiServer](src/api-server/ApiServer.md) : Goes over the available API routes and what they return.
 - [Todos](Todos.md) : Goes over major todos of the project.
+
+# Contact person
+
+Reach out to mannysa@bu.edu for clarification, if needed.
