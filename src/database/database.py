@@ -7,14 +7,17 @@ def getSQLiteConnection():
     conn.row_factory = sqlite3.Row
     return conn
 
-def createAllTables():
+def createResultTables():
     conn = sqlite3.connect(DATABASE_NAME)
     cursor = conn.cursor()
 
-    # Delete previusly identified badlandlords. 
+    # Delete previously identified badlandlords. 
     # Other processing data is left untouched
     cursor.execute('''
         DROP TABLE IF EXISTS badlandlords_criteria_i
+    ''')
+    cursor.execute('''
+        DROP TABLE IF EXISTS badlandlords_criteria_ii
     ''')
 
     cursor.execute('''

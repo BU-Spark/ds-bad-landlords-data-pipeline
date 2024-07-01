@@ -26,7 +26,7 @@ def getConnection():
         print("Error while connecting to masscourt database:", error)
         return None
 
-def fetchBadLandlordsFromCourtCaseDatabase():
+def identifyBadLandlordsFromCourtCaseDatabase():
     connection = getConnection()
     if connection is None:
         return
@@ -88,6 +88,6 @@ def getFormattedUniqueBadLandlords():
     grouped_df = df.groupby(['party_name', 'party_id'])['case_number'].agg(list).reset_index()
     grouped_df.rename(columns={'case_number': 'case numbers'}, inplace=True)
     
-    # convert to jon
+    # convert to json
     result = grouped_df.to_dict(orient='records')
     return json.dumps(result, indent=4)

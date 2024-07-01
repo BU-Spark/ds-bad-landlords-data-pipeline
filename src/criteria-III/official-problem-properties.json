@@ -1,3 +1,31 @@
-{
-    
-}
+[
+    {
+      "ADDRESS": "10 Helen Street",
+      "NEIGHBORHOOD": "Dorchester",
+      "PARCEL ID": "1402226000",
+      "NAME / OWNER (IF APPLICABLE)": "Joan Greaves Charles",
+      "DATE OF DESIGNATION": "December 14, 2022"
+    },
+    {
+      "ADDRESS": "48 Lorna Road",
+      "NEIGHBORHOOD": "Mattapan",
+      "PARCEL ID": "1800472000",
+      "NAME / OWNER (IF APPLICABLE)": "Mai S. Harris",
+      "DATE OF DESIGNATION": "October 13, 2021"
+    },
+    {
+      "ADDRESS": "73 Maywood Street",
+      "NEIGHBORHOOD": "Roxbury",
+      "PARCEL ID": "1200995001",
+      "NAME / OWNER (IF APPLICABLE)": "HS Land Trust",
+      "DATE OF DESIGNATION": "October 13, 2021"
+    },
+    {
+      "ADDRESS": "296 HF Shawmut Avenue",
+      "NEIGHBORHOOD": "South End",
+      "PARCEL ID": "0305988000",
+      "NAME / OWNER (IF APPLICABLE)": "C/O Ramon M Mansour TS",
+      "DATE OF DESIGNATION": "October 13, 2021"
+    }
+  ]
+  

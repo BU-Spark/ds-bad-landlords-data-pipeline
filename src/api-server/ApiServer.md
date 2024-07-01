@@ -1,6 +1,6 @@
 # API Server
 
-This is a simple api to return results of the processing. Several routes will be added as data processing module matures.
+This is a simple api to return results of the data processing. Several routes will be added as data processing module matures.
 
 ## Routes
 
@@ -12,10 +12,6 @@ This is a simple api to return results of the processing. Several routes will be
     - data points used to get bad landlords in each criteria
     - filters used
 
-- POST /forcerun:
-
-  - reruns data processing immediately without waiting for next scheduled time.
-
 - GET /badlandlords:
 
   - Return bad landlords in json format
@@ -23,18 +19,7 @@ This is a simple api to return results of the processing. Several routes will be
     - criteria : i, ii, iii, all
   - return format:
     - criteria i : {name, cases}
-    - criteria ii : {name, address, violations, properties}. violations and properties are comma separated OR arrays of strings. A violation is represented by violation case number whilst a property is represented by full address.
-    
-  - Implementation:
-
-    - criteria I: get unique landlords from badlandlords_criteria_i table.
-
-    ```
-      SELECT party_name, party_id, case_number
-      FROM badlandlords_criteria_i
-      WHERE row_num = 1;
-
-    ```
+    - criteria ii : {name, address, violations, properties}. A violation is represented by violation case number whilst a property is represented by full address.
 
 - GET /badlandlords/search:
 
@@ -42,14 +27,3 @@ This is a simple api to return results of the processing. Several routes will be
   - params:
     - name
     - address
-
-- GET /cases/landlord_id:
-
-  - Return all cases that a bad landlord is involved in. in json format
-  - params:
-    - landlord_id
-
-- GET /properties/landlord_id:
-  - Return all properties that a bad landlord owns. in json format
-  - params:
-    - landlord_id

@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 
 from database.database import insertIntoSQLiteTable
 
-def determineBadlandlordsFromViolationsDatasets():
+def indentifyBadlandlordsFromViolationsDatasets():
     violations_df = fetchViolationsData()
     sam_df = fetchSamData()
     violations_df = addParcelIdsToViolationsDataset(violations_df, sam_df)
@@ -49,8 +49,6 @@ def addParcelIdsToViolationsDataset(violations_df, sam_df):
 
     merged_df = violations_df.merge(sam_df[['SAM_ADDRESS_ID', 'PARCEL']], left_on='sam_id', right_on='SAM_ADDRESS_ID', how='left')
     violations_df['parcel'] = merged_df['PARCEL']
-
-    print(violations_df)
     return violations_df
 
 def fetchPropertyData(violations_df):
@@ -122,7 +120,7 @@ def fetchLandlordProperties(landlordName):
         data = response.json()["result"]["records"]
         l_p_df = pd.DataFrame(data)
         print("Successfully fetched property data for landlord:", landlordName)
-        print(l_p_df) 
+        print(l_p_df)
         l_p_df = l_p_df.fillna('')
         addresses = l_p_df.apply(lambda x: {
             'st_num': x['ST_NUM'],
@@ -136,3 +134,6 @@ def fetchLandlordProperties(landlordName):
         print("Error fetching properties of landlord:", landlordName)
         return []
 
+"""
+https://data.boston.gov/api/3/action/datastore_search_sql?sql=SELECT * from \"a9eb19ad-da79-4f7b-9e3b-6b13e66f8285\" WHERE \"OWNER\" LIKE 'LEXINGTON STREET REALTY TRUST'
+"""

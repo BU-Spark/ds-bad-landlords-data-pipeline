@@ -128,7 +128,7 @@ https://data.boston.gov/api/3/action/datastore_search_sql?sql=SELECT * from "a9e
 - Add and fill new column "parcel".
   For each row in df, get and add parcel value by using the row's samid to fetch a parcel number in sam table.
 
-- Add and fill new column "lanlord".
+- Add and fill new column "landlord".
   For each row in df, get and add landlord value by using the row's parcel to fetch an owner in number in landlord table.
 
 - Create landlord tally.
@@ -136,25 +136,7 @@ https://data.boston.gov/api/3/action/datastore_search_sql?sql=SELECT * from "a9e
 - Create landlord ids for efficient tallying
   Using fuzzy matching, create an index of all landlords. For each row, check all other rows if match exceeds 0.9. If so, it's the same landlord. Add id.
 
-
-- Write results to new table
-table 1: properties with violations (with landlord name attached)
-table 2: violations
-
-form another table: 
-
-  - name : owner from property table
-  - address : mail combo from property table
-  - violations : case numbers from table 1 where landlord name is the same
-  - properties : from query search
-```
-Table : badlandlords_criteria_i
-Schema:
-    - name : varchar(255)
-    - address : bigint(20) UN
-    - violations : varchar(50) 
-    - properties
-```
+https://data.boston.gov/api/3/action/datastore_search_sql?sql=SELECT * from "a9eb19ad-da79-4f7b-9e3b-6b13e66f8285" WHERE "OWNER" LIKE 'LEXINGTON'
 
 ## Criteria III
 
@@ -193,3 +175,11 @@ This part is trivial. The short list here is hardcoded in a json. When the list 
 - QualifyingCriterias
 
 To get a combined list of landlords, we scan all three lists for similar landlord names. We make a copy of CII and look for each landlord name from other criterias in it. If not in, we append. We use CII row nums as landlord id. 
+
+# Notes
+
+Criteria II will often yield 0 bad landlords. This is simply due to the criteria having filters that are unlikely. 
+
+First of all, the ordinance considers only 3 types of violations occuring in the last 12 months, which there aren't many of.
+
+Also, most buildings with violations usually aren't found in the property dataset. Among the ones that are found, we need to discard owner-occupied properties since we are only interested in rental properties. Moreover, the ordinance requires a landlord to accrue 6+ violations, making it even less likely for a landlord to fit all the filters.
