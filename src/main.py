@@ -23,6 +23,6 @@ def identifyBadLandlords():
                      json.dumps(["filter1", "filter2"])])
     updateSummaryTable(summary)
     pass
-getBadLandlordsFromProblemProperties()
-# createResultTables()
-# identifyBadLandlords()
+
+createResultTables()
+identifyBadLandlords()
