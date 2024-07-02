@@ -1,31 +1,40 @@
 [
-    {
-      "ADDRESS": "10 Helen Street",
-      "NEIGHBORHOOD": "Dorchester",
-      "PARCEL ID": "1402226000",
-      "NAME / OWNER (IF APPLICABLE)": "Joan Greaves Charles",
-      "DATE OF DESIGNATION": "December 14, 2022"
-    },
-    {
-      "ADDRESS": "48 Lorna Road",
-      "NEIGHBORHOOD": "Mattapan",
-      "PARCEL ID": "1800472000",
-      "NAME / OWNER (IF APPLICABLE)": "Mai S. Harris",
-      "DATE OF DESIGNATION": "October 13, 2021"
-    },
-    {
-      "ADDRESS": "73 Maywood Street",
-      "NEIGHBORHOOD": "Roxbury",
-      "PARCEL ID": "1200995001",
-      "NAME / OWNER (IF APPLICABLE)": "HS Land Trust",
-      "DATE OF DESIGNATION": "October 13, 2021"
-    },
-    {
-      "ADDRESS": "296 HF Shawmut Avenue",
-      "NEIGHBORHOOD": "South End",
-      "PARCEL ID": "0305988000",
-      "NAME / OWNER (IF APPLICABLE)": "C/O Ramon M Mansour TS",
-      "DATE OF DESIGNATION": "October 13, 2021"
+  {
+    "name": "Joan Greaves Charles",
+    "problem_property": {
+      "address": "10 Helen Street",
+      "neighborhood": "Dorchester",
+      "parcelId": "1402226000",
+      "dateOfDesignation": "December 14, 2022"
     }
-  ]
-  
+  },
+  {
+    "name": "Mai S. Harris",
+    "problem_property": {
+      "address": "48 Lorna Road",
+      "neighborhood": "Mattapan",
+      "parcelId": "1800472000",
+      "dateOfDesignation": "October 13, 2021"
+    }
+  },
+  {
+    "name": "HS Land Trust",
+    "problem_property": {
+      "address": "73 Maywood Street",
+      "neighborhood": "Roxbury",
+      "parcelId": "1200995001",
+      "dateOfDesignation": "October 13, 2021"
+    }
+    
+  },
+  {
+    "name": "C/O Ramon M Mansour TS",
+    "problem_property": {
+      "address": "296 HF Shawmut Avenue",
+      "neighborhood": "South End",
+      "parcelId": "0305988000",
+      "dateOfDesignation": "October 13, 2021"
+    }
+   
+  }
+]

@@ -18,8 +18,6 @@ Part of the deliverables is searching by landlord name or address. This needs to
 Project is currently deployed on NERC for demo purposes. Find a permanent deployment home. 
 
 ### Miscellaneous implementation todos 
-- Complete criteria III
-    - simply return the official list of problem properties on route GET /badlandlords?criteria=iii
 - [Sam dataset](https://data.boston.gov/dataset/live-street-address-management-sam-addresses)'s api is offline at the moment. When it is online, modify criteria II to fetch sam data via api instead of the locally stored, 6 months+ old xlsx file. 
 - Fill summary table with info about data points and filters used for processing.
 - In criteria II, ensure all properties of a landlord are fetched instead of just one.

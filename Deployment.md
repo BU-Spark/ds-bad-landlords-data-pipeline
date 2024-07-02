@@ -16,7 +16,7 @@ Criteria I requires credentials to connect mass court database. Place the creden
 
   The Flask server is served at port 80 so exposing the container's port 80 to localhost 80 makes the server available outside the container.
 
-- Add masscourt database keys
+- Add masscourt database keys to .env file
   Reach out to mannysa@bu.edu for the keys.
 
 ## How to change processing cadence

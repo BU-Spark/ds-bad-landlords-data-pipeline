@@ -4,6 +4,7 @@ from database.database import createResultTables, updateSummaryTable
 import datetime
 from criteriaII.processII import indentifyBadlandlordsFromViolationsDatasets
 from criteriaI.processI import identifyBadLandlordsFromCourtCaseDatabase
+from criteriaIII.processIII import getBadLandlordsFromProblemProperties
 
 def identifyBadLandlords():
     start_time = time.time()
@@ -22,6 +23,6 @@ def identifyBadLandlords():
                      json.dumps(["filter1", "filter2"])])
     updateSummaryTable(summary)
     pass
-
-createResultTables()
-identifyBadLandlords()
+getBadLandlordsFromProblemProperties()
+# createResultTables()
+# identifyBadLandlords()

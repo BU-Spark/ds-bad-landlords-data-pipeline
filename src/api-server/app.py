@@ -1,12 +1,14 @@
 import sys
 import os
 
+
 # ensures modules can be imported from src directory
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', )))
 
 from flask import Flask, jsonify, request
-from criteriaI.processI import getFormattedUniqueBadLandlords
 from database.database import getSQLiteConnection
+from criteriaI.processI import getFormattedUniqueBadLandlords
+from criteriaIII.processIII import getBadLandlordsFromProblemProperties
 
 app = Flask(__name__)
 
@@ -32,6 +34,8 @@ def getBadLandlords():
         rows = None
         if criteria == 'i':
             return getFormattedUniqueBadLandlords()
+        if criteria == 'iii':
+            return getBadLandlordsFromProblemProperties()
         conn = getSQLiteConnection()
         cursor = conn.cursor()
         cursor.execute(f'SELECT * FROM badlandlords_criteria_{criteria}')
